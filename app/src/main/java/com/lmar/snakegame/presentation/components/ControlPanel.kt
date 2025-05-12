@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -25,6 +26,82 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ControlPanel(
+    modifier: Modifier = Modifier,
+    onLeftClick: () -> Unit,
+    onRightClick: () -> Unit,
+    onDownClick: () -> Unit,
+    onUpClick: () -> Unit
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(140.dp)
+            .padding(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Button(
+            modifier = Modifier.weight(1f).height(120.dp),
+            onClick = { onLeftClick() },
+            shape = MaterialTheme.shapes.medium
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                contentDescription = "Izquierda",
+                tint = Color.White
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .weight(2f)
+                .height(140.dp)
+                .padding(horizontal = 8.dp),
+            verticalArrangement = Arrangement.SpaceAround,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(
+                modifier = Modifier.fillMaxWidth().height(60.dp),
+                onClick = { onUpClick() },
+                shape = MaterialTheme.shapes.medium
+            ) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowUp,
+                    contentDescription = "Arriba",
+                    tint = Color.White
+                )
+            }
+
+            Button(
+                modifier = Modifier.fillMaxWidth().height(60.dp),
+                onClick = { onDownClick() },
+                shape = MaterialTheme.shapes.medium
+            ) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Abajo",
+                    tint = Color.White
+                )
+            }
+        }
+
+        Button(
+            modifier = Modifier.weight(1f).height(120.dp),
+            onClick = { onRightClick() },
+            shape = MaterialTheme.shapes.medium
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = "Derecha",
+                tint = Color.White
+            )
+        }
+    }
+
+}
+
+@Composable
+fun ControlPanelSimple(
     modifier: Modifier = Modifier,
     onLeftClick: () -> Unit,
     onRightClick: () -> Unit,

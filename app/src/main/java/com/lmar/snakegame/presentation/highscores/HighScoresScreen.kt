@@ -21,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.lmar.snakegame.domain.model.LevelEnum
 
 @Composable
 fun HighScoresScreen(viewModel: HighScoresViewModel = hiltViewModel()) {
@@ -56,7 +57,11 @@ fun HighScoresScreen(viewModel: HighScoresViewModel = hiltViewModel()) {
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = score.levelName, color = Color.White)
+                        var level = LevelEnum.entries
+                            .find { level -> level.name == score.levelName }
+                            ?: LevelEnum.EASY
+
+                        Text(text = level.label, color = Color.White)
                         Text(text = "${score.score} pts", color = Color.Green)
                     }
                 }
